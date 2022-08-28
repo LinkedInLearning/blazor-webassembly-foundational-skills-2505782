@@ -10,6 +10,11 @@ namespace MyBlazorShop.Libraries.Services.ShoppingCart.Models
     {
         public int Count { get; set; }
 
-        public event Action? OnCountChange;
+        public event Action? CountChange;
+
+        public void OnCountChange()
+        {
+            CountChange?.Invoke();
+        }
     }
 }
