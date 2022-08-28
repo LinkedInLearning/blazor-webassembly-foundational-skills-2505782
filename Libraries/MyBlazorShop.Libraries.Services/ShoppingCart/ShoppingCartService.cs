@@ -80,7 +80,7 @@ namespace MyBlazorShop.Libraries.Services.ShoppingCart
         /// <returns>The total number of items.</returns>
         public int Count()
         {
-            return Get().Items.Count();
+            return Get().Items.Sum(x => x.Quantity);
         }
 
         /// <summary>

@@ -1,0 +1,11 @@
+﻿﻿.cart-count {
+    border-radius: 62.5rem;
+    color: #3a3a3d;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0 0.25rem;
+    right: -0.625rem;
+    top: -0.3125rem;
+    position: absolute;
+    background-color: #f0c808
+}
