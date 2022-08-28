@@ -80,6 +80,9 @@
     public IList<ProductModel>? AllProducts { get; set; }
 
     private ProductAddToCartModel ProductAddToCartModel = new ProductAddToCartModel();
+
+    [CascadingParameter(Name="ShoppingCartCountModel")]
+    public ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
 }
 @functions {
     protected override void OnInitialized()
@@ -103,6 +106,10 @@
         {
             shoppingCartService.AddProduct(Product, ProductAddToCartModel.Quantity ?? 1);
             ProductAddToCartModel.Quantity = null;
+
+            if (ShoppingCartCountModel != null) {
+                ShoppingCartCountModel.OnCountChange();
+            } 
         }
     }
 }

@@ -38,6 +38,9 @@
     public ProductModel? Product { get; set; }
 
     public int? Quantity { get; set; }
+
+    [CascadingParameter(Name="ShoppingCartCountModel")]
+    public ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
 }
 @functions {
     public void AddToCart()
@@ -46,6 +49,10 @@
         {
             shoppingCartService.AddProduct(Product, Quantity ?? 1);
             Quantity = null;
+
+            if (ShoppingCartCountModel != null) {
+                ShoppingCartCountModel.OnCountChange();
+            } 
         }
     }
 }

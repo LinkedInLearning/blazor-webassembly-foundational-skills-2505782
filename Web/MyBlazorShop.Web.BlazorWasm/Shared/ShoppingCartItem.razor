@@ -18,6 +18,9 @@
 @code {
     [Parameter]
     public ShoppingCartItemModel? Item { get; set; }
+
+    [CascadingParameter(Name="ShoppingCartCountModel")]
+    public ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
 }
 @functions {
     public void DeleteCartItem()
@@ -26,6 +29,10 @@
         {
             shoppingCartService.DeleteProduct(Item);
             Item = null;
+
+            if (ShoppingCartCountModel != null) {
+                ShoppingCartCountModel.OnCountChange();
+            }
         }
     }
 }
