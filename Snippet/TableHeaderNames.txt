@@ -1,4 +1,4 @@
-    private List<TableHeaderName> Names = new() {
+    private List<TableHeaderName> TableHeaderNames = new() {
         new TableHeaderName("Product", 2),
         new TableHeaderName("Price", 1),
         new TableHeaderName("Quantity", 1),
