@@ -1,7 +1,0 @@
-    private List<TableHeaderName> TableHeaderNames = new() {
-        new TableHeaderName("Product", 2),
-        new TableHeaderName("Price", 1),
-        new TableHeaderName("Quantity", 1),
-        new TableHeaderName("Total", 1),
-        new TableHeaderName("Remove", 1)
-    };
