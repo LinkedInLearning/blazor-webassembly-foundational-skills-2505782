@@ -30,7 +30,7 @@
     public IList<ProductModel> Products { get; set; }
 }
 @functions {
-    protected override void OnInitialized()
+    protected override void OnParametersSet()
     {
         Products = productService.GetAll();
         base.OnInitialized();
