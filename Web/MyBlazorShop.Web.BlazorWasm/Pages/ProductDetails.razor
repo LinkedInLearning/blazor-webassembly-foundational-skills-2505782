@@ -72,12 +72,12 @@
        </div>
     </main>
 @code {
-    public ProductModel? Product { get; set; }
+    private ProductModel? Product { get; set; }
 
     [Parameter]
     public string? Slug { get; set; }
 
-    public IList<ProductModel>? AllProducts { get; set; }
+    private IList<ProductModel>? AllProducts { get; set; }
 
     private ProductAddToCartModel ProductAddToCartModel = new ProductAddToCartModel();
 
