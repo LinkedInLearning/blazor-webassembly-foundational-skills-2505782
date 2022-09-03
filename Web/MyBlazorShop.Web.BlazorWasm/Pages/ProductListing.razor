@@ -36,12 +36,12 @@
 }
 
 @code {
-    public IList<ProductModel> Products { get; set; }
+    private IList<ProductModel> Products { get; set; }
 
     [Parameter, SupplyParameterFromQuery]
     public int? Page { get; set; }
 
-    public int TotalPageCount { get; set; }
+    private int TotalPageCount { get; set; }
 }
 @functions {
     protected override void OnParametersSet()
