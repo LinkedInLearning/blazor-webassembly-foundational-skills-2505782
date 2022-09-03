@@ -20,10 +20,10 @@
     public ShoppingCartItemModel? Item { get; set; }
 
     [CascadingParameter(Name="ShoppingCartCountModel")]
-    public ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
+    private ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
 }
 @functions {
-    public void DeleteCartItem()
+    private void DeleteCartItem()
     {
         if (Item != null)
         {

@@ -34,7 +34,7 @@
 </div>
 @code {
     [CascadingParameter(Name="ShoppingCartCountModel")]
-    public ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
+    private ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
 
     protected override void OnInitialized()
     {

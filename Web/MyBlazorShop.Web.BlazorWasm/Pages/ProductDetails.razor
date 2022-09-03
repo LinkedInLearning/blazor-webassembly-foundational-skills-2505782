@@ -72,17 +72,17 @@
        </div>
     </main>
 @code {
-    public ProductModel? Product { get; set; }
+    private ProductModel? Product { get; set; }
 
     [Parameter]
     public string? Slug { get; set; }
 
-    public IList<ProductModel>? AllProducts { get; set; }
+    private IList<ProductModel>? AllProducts { get; set; }
 
     private ProductAddToCartModel ProductAddToCartModel = new ProductAddToCartModel();
 
     [CascadingParameter(Name="ShoppingCartCountModel")]
-    public ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
+    private ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
 }
 @functions {
     protected override void OnInitialized()
@@ -100,7 +100,7 @@
         }        
     }
 
-    public void AddToCart()
+    private void AddToCart()
     {
         if (Product != null)
         {
