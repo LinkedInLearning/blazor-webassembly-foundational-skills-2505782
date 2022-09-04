@@ -49,7 +49,7 @@
         var productListingConfig = configuration.GetSection("ProductListing");
 
         Products = productService.GetAll(productListingConfig.GetValue<int>("PageSize"), Page ?? 1);
-        TotalPageCount = productService.GetTotalPageCount(4);
+        TotalPageCount = productService.GetTotalPageCount(productListingConfig.GetValue<int>("PageSize"));
 
         base.OnParametersSet();
     }
