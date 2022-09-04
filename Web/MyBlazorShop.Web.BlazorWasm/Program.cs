@@ -20,6 +20,14 @@ using var stream = await response.Content.ReadAsStreamAsync();
 
 builder.Configuration.AddJsonStream(stream);
 
+using var environmentResponse = await http.GetAsync("productlisting." + builder.HostEnvironment.Environment + ".json");
+
+if (environmentResponse.IsSuccessStatusCode)
+{
+    using var environmentStream = await environmentResponse.Content.ReadAsStreamAsync();
+    builder.Configuration.AddJsonStream(environmentStream);
+}
+
 builder.Services.AddSingleton<IStorageService, StorageService>();
 builder.Services.AddSingleton<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddTransient<IProductService, ProductService>();
