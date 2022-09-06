@@ -57,15 +57,10 @@
         ));
 
         // Get page count
-        var pageCount = await httpClient.GetFromJsonAsync<ProductPageCountModel>(
-            string.Format("/api/product/page-count?size={0}", 
+        TotalPageCount = await httpClient.GetFromJsonAsync<int>(
+            string.Format("/api/product/total-page-count?size={0}", 
             productListingConfig.GetValue<int>("PageSize")
         ));
-
-        if (pageCount != null)
-        {
-            TotalPageCount = pageCount.TotalPageCount;
-        }
 
         await base.OnParametersSetAsync();
     }

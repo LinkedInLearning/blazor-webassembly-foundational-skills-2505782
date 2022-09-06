@@ -2,6 +2,7 @@
 @using MyBlazorShopHosted.Libraries.Shared.ShoppingCart.Models
 @using MyBlazorShopHosted.Web.BlazorWasm.Client.Shared.Layout
 @page "/product/{slug}"
+@inject NavigationManager navigationManager
 @inject HttpClient httpClient
 @if (Product != null)
 {
@@ -129,6 +130,8 @@
             if (ShoppingCartCountModel != null) {
                 ShoppingCartCountModel.OnCountChange();
             } 
+
+            navigationManager.NavigateTo("/cart");
         }
     }
 }

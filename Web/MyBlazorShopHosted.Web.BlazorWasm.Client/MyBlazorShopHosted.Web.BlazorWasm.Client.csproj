@@ -24,4 +24,6 @@
     <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
   </PropertyGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties wwwroot_4productlisting_1json__JsonSchema="https://beaujs.com/schema.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

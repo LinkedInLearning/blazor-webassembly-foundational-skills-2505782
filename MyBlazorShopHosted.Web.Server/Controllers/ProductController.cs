@@ -29,11 +29,11 @@ namespace MyBlazorShopHosted.Web.Server.Controllers
             return _productService.GetAll(size.Value, page);
         }
 
-        [HttpGet("page-count")]
-        public ProductPageCountModel GetTotalPageCount(int size)
+        [HttpGet("total-page-count")]
+        public int GetTotalPageCount(int size)
         {
             // Return page count
-            return new ProductPageCountModel { TotalPageCount = _productService.GetTotalPageCount(size) };
+            return _productService.GetTotalPageCount(size);
         }
 
         [HttpGet("by-sku/{sku}")]
