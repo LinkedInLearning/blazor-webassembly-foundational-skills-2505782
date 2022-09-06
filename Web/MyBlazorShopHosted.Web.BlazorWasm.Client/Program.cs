@@ -9,16 +9,21 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 var http = new HttpClient()
 {
-    BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+    BaseAddress = new Uri("https://localhost:8002")
 };
 builder.Services.AddScoped(sp => http);
 
-using var response = await http.GetAsync("productlisting.json");
+var webAssemblyHost = new HttpClient()
+{
+    BaseAddress = new Uri("https://localhost:9002")
+};
+
+using var response = await webAssemblyHost.GetAsync("productlisting.json");
 using var stream = await response.Content.ReadAsStreamAsync();
 
 builder.Configuration.AddJsonStream(stream);
 
-using var environmentResponse = await http.GetAsync("productlisting." + builder.HostEnvironment.Environment + ".json");
+using var environmentResponse = await webAssemblyHost.GetAsync("productlisting." + builder.HostEnvironment.Environment + ".json");
 
 if (environmentResponse.IsSuccessStatusCode)
 {

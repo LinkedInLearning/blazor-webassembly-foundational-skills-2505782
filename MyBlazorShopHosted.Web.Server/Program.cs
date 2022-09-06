@@ -7,6 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("_BlazorWasm", policy =>
+    {
+        policy
+        .WithOrigins("https://localhost:9002")
+        .WithMethods("GET", "POST", "DELETE")
+        .AllowAnyHeader();
+    });
+});
 
 // Dependency injection
 builder.Services.AddSingleton<IStorageService, StorageService>();
@@ -28,16 +38,21 @@ else
 }
 
 app.UseHttpsRedirection();
-app.UseBlazorFrameworkFiles();
-app.UseStaticFiles();
+//app.UseBlazorFrameworkFiles();
+//app.UseStaticFiles();
 
 app.UseRouting();
+
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapRazorPages();
+
+
+//app.MapRazorPages();
 app.MapControllers();
-app.MapFallbackToFile("index.html");
+//app.MapFallbackToFile("index.html");
+
+app.UseCors("_BlazorWasm");
 
 app.Run();
