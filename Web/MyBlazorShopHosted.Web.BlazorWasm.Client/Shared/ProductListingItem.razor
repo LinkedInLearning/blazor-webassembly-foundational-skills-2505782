@@ -61,7 +61,7 @@
         if (Product != null)
         {
             // Add to shopping cart
-            await httpClient.PostAsJsonAsync<ShoppingCartAddModel>(
+            await httpClient.PostAsJsonAsync(
                 "/api/shopping-cart",
                 new ShoppingCartAddModel
                 {
