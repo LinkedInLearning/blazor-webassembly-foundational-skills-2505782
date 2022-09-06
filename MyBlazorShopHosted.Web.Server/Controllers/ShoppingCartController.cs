@@ -33,23 +33,23 @@ namespace MyBlazorShopHosted.Web.Server.Controllers
             return _shoppingCartService.Count();
         }
 
-        [HttpGet("has-product")]
+        [HttpGet("has-product/{sku}")]
         public bool HasProduct(string sku)
         {
             return _shoppingCartService.HasProduct(sku);
         }
 
         [HttpPost]
-        public IActionResult AddProduct(string sku, int quantity)
+        public IActionResult AddProduct(ShoppingCartAddModel shoppingCartAddModel)
         {
-            var product = _productService.Get(sku);
+            var product = !string.IsNullOrWhiteSpace(shoppingCartAddModel.ProductSku) ? _productService.Get(shoppingCartAddModel.ProductSku) : null;
 
             if (product == null)
             {
-                return NotFound(string.Format("The sku '{0}' could not be found", sku));
+                return NotFound(string.Format("The sku '{0}' could not be found", shoppingCartAddModel.ProductSku));
             }
 
-            _shoppingCartService.AddProduct(product, quantity);
+            _shoppingCartService.AddProduct(product, shoppingCartAddModel.Quantity);
 
             return Ok(new { Success = true });
         }
@@ -59,7 +59,7 @@ namespace MyBlazorShopHosted.Web.Server.Controllers
         {
             var cart = _shoppingCartService.Get();
 
-            if (cart == null || !cart.Items.Any(s => s.Product.Sku == sku))
+            if (cart?.Items == null || !cart.Items.Any(s => s.Product.Sku == sku))
             {
                 return NotFound(string.Format("The sku '{0}' could not be found", sku));
             }

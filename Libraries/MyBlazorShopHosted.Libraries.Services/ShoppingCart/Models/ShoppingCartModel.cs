@@ -10,7 +10,7 @@ namespace MyBlazorShopHosted.Libraries.Services.ShoppingCart.Models
         /// <summary>
         /// A list of all the items stored in the shopping cart.
         /// </summary>
-        public IList<ShoppingCartItemModel> Items { get; }
+        public IList<ShoppingCartItemModel> Items { get; init; }
 
         /// <summary>
         /// Constructs a new shopping cart.

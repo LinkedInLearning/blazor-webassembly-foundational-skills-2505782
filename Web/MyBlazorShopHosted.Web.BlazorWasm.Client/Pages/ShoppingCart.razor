@@ -18,7 +18,7 @@
             <div class="display:flex flex-direction:column color:blue-265f8e margin-bottom:12">
                 <TableTemplate HeaderNames="@TableHeaderNames">
                     <RowTemplate>
-                        @if (ShoppingCartItems != null)
+                        @if (ShoppingCartItems?.Items != null)
                         {
                             @foreach (var item in ShoppingCartItems.Items)
                             {

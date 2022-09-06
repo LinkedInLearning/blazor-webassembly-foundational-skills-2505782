@@ -101,12 +101,12 @@
         if (!string.IsNullOrWhiteSpace(Slug))
         {
             Product = await httpClient.GetFromJsonAsync<ProductModel?>(
-                string.Format("/api/product/byslug/{slug}", Slug)
+                string.Format("/api/product/by-slug/{0}", Slug)
             );
             if (Product != null)
             {
                 HasProductInCart = await httpClient.GetFromJsonAsync<bool>(
-                        string.Format("/api/shopping-cart/has-product/{sku}", Product.Sku)
+                        string.Format("/api/shopping-cart/has-product/{0}", Product.Sku)
                 );
             }
         }        
@@ -117,13 +117,13 @@
         if (Product != null)
         {
             // Add to shopping cart
-            await httpClient.PostAsJsonAsync(
+            await httpClient.PostAsJsonAsync<ShoppingCartAddModel>(
                 "/api/shopping-cart",
-                new
-                {
-                    sku = Product.Sku,
-                    quantity = ProductAddToCartModel.Quantity ?? 1
-                }
+                new ShoppingCartAddModel
+                    {
+                        ProductSku = Product.Sku,
+                        Quantity = ProductAddToCartModel.Quantity ?? 1
+                    }
             );
 
             ProductAddToCartModel.Quantity = null;

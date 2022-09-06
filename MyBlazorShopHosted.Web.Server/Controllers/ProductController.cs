@@ -36,7 +36,7 @@ namespace MyBlazorShopHosted.Web.Server.Controllers
             return new ProductPageCountModel { TotalPageCount = _productService.GetTotalPageCount(size) };
         }
 
-        [HttpGet("bysku/{sku}")]
+        [HttpGet("by-sku/{sku}")]
         public IActionResult GetBySku(string sku)
         {
             var product = _productService.Get(sku);
@@ -49,7 +49,7 @@ namespace MyBlazorShopHosted.Web.Server.Controllers
             return Ok(product);
         }
 
-        [HttpGet("byslug/{slug}")]
+        [HttpGet("by-slug/{slug}")]
         public IActionResult GetBySlug(string slug)
         {
             var product = _productService.GetBySlug(slug);
