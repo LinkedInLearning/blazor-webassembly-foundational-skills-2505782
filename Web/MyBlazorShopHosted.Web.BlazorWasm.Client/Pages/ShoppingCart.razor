@@ -1,0 +1,38 @@
+﻿@using MyBlazorShopHosted.Libraries.Services.ShoppingCart
+@using MyBlazorShopHosted.Web.BlazorWasm.Client.Shared.Template
+@using MyBlazorShopHosted.Web.BlazorWasm.Client.Components
+@using System.Globalization
+@using Microsoft.Extensions.Localization
+@page "/cart"
+@inject IShoppingCartService shoppingCartService
+@inject IStringLocalizer<ShoppingCart> localizer
+<PageTitle>@localizer["Title"]</PageTitle>
+<HeadContent>
+    <meta name="description" content="@localizer["Title"] page" />
+</HeadContent>
+<div id="vue-cart" class="quenched">
+    <main class="margin-horizontal:auto max-width:container padding-horizontal:32">
+        <div>
+            <h1 class="font-weight:500 @@mq-960--margin-bottom:24 color:blue-265f8e font-size:36 line-height:1_222 margin-bottom:12 margin-top:24">@localizer["Title"]</h1>
+            <div class="display:flex flex-direction:column color:blue-265f8e margin-bottom:12">
+                <TableTemplate HeaderNames="@TableHeaderNames">
+                    <RowTemplate>
+                        @foreach (var item in shoppingCartService.Get().Items)
+                        {
+                            <ShoppingCartItem Item="item"></ShoppingCartItem>
+                        }
+                    </RowTemplate>
+                </TableTemplate>
+            </div>
+        </div>
+    </main>
+</div>
+@code {
+    private List<TableHeaderName> TableHeaderNames = new() {
+        new TableHeaderName("Product", 2),
+        new TableHeaderName("Price", 1),
+        new TableHeaderName("Quantity", 1),
+        new TableHeaderName("Total", 1),
+        new TableHeaderName("Remove", 1)
+    };
+}

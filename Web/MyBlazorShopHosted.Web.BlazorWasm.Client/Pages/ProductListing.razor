@@ -1,0 +1,58 @@
+﻿@using MyBlazorShopHosted.Libraries.Services.Product
+@using MyBlazorShopHosted.Libraries.Services.Product.Models
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@page "/"
+@inject IProductService productService
+@inject NavigationManager navigationManager
+@inject IConfiguration configuration
+@inject IWebAssemblyHostEnvironment environment
+<PageTitle>Product listings</PageTitle>
+<HeadContent>
+    <meta name="description" content="Product listing page" />
+</HeadContent>
+<Hero Title="@configuration["Hero:Title"]" Description="@configuration["Hero:Description"]" Image="@configuration["Hero:Image"]" BackgroundColor="@configuration["Hero:BackgroundColor"]"></Hero>
+
+@if (Products?.Any() ?? false)
+{
+    <main class="margin-horizontal:auto max-width:container padding-horizontal:32">
+        <div id="vue-shop" class="margin-bottom:32 quenched">
+            <div class="display:flex flex-grow:1 flex-wrap:wrap margin-bottom:-32 margin-horizontal:-16">
+                <div class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-768--width:100">
+                    <ul class="display:flex flex-grow:1 flex-wrap:wrap margin-bottom:-32 margin-horizontal:-16">
+                        @foreach(var product in Products)
+                        {
+                            <ProductListingItem Product="product"></ProductListingItem>
+                        }                        
+                    </ul>
+                    @if (TotalPageCount > 1) {
+                        <ul class="pages">
+                            @for (var page = 1; page <= TotalPageCount; page++) {
+                                <li><a href="@navigationManager.GetUriWithQueryParameter("page", page)">@(page)</a></li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </main>
+}
+
+@code {
+    private IList<ProductModel> Products { get; set; }
+
+    [Parameter, SupplyParameterFromQuery]
+    public int? Page { get; set; }
+
+    private int TotalPageCount { get; set; }
+}
+@functions {
+    protected override void OnParametersSet()
+    {
+        var productListingConfig = configuration.GetSection("ProductListing");
+
+        Products = productService.GetAll(productListingConfig.GetValue<int>("PageSize"), Page ?? 1);
+        TotalPageCount = productService.GetTotalPageCount(productListingConfig.GetValue<int>("PageSize"));
+
+        base.OnParametersSet();
+    }
+}

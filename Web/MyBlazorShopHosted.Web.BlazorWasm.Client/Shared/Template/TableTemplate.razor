@@ -1,0 +1,27 @@
+﻿@using MyBlazorShopHosted.Web.BlazorWasm.Client.Components
+<table class="@@mq-upto-768--display:block @@mq-upto-768--margin-horizontal:-24">
+    @if (HeaderNames?.Any() ?? false)
+    {
+        <thead class="@@mq-upto-768--visually-hidden">
+            <tr>
+                @foreach (var headerName in HeaderNames) {
+                    <th colspan="@headerName.Colspan" scope="col" class="border-bottom-style:solid border-bottom-width:1 border-bottom-color:neutral-979797 color:neutral-4c5b5c font-size:20 font-weight:400 padding-bottom:12 padding-horizontal:20 text-align:left">
+                        @headerName.Name
+                    </th>
+                }
+            </tr>
+        </thead>
+    }
+    <tbody class="@@mq-upto-768--display:block">
+        @if (RowTemplate != null) {
+            @RowTemplate
+        }
+    </tbody>
+</table>
+@code {
+    [Parameter]
+    public IReadOnlyList<TableHeaderName>? HeaderNames { get; set; }
+
+    [Parameter]
+    public RenderFragment? RowTemplate { get; set; }
+}
