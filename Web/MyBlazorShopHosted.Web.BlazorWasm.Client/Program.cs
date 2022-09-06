@@ -33,7 +33,7 @@ if (environmentResponse.IsSuccessStatusCode)
 
 builder.Services.AddLocalization();
 
-CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-GB");
-CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-GB");
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
 
 await builder.Build().RunAsync();
