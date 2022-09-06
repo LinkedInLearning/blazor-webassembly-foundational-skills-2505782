@@ -1,6 +1,6 @@
 ﻿@using MyBlazorShopHosted.Libraries.Services.ShoppingCart;
 @using MyBlazorShopHosted.Libraries.Services.ShoppingCart.Models
-@inject IShoppingCartService shoppingCartService
+@inject HttpClient httpClient
 <div id="vue-header" class="quenched">
     <header class="border-bottom-color:neutral-000000 border-bottom-style:solid border-bottom-width:1 display:block padding-vertical:8">
         <div class="margin-horizontal:auto max-width:container padding-horizontal:32">
@@ -36,16 +36,18 @@
     [CascadingParameter(Name="ShoppingCartCountModel")]
     private ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         if (ShoppingCartCountModel != null)
         {
-            ShoppingCartCountModel.CountChange += () =>
+            ShoppingCartCountModel.CountChange += async() =>
             {
-                ShoppingCartCountModel.Count = shoppingCartService.Count();
+                ShoppingCartCountModel.Count = await httpClient.GetFromJsonAsync<int>(
+                    "/api/shopping-cart/count"
+                );
                 StateHasChanged();
             };
         }
-        base.OnInitialized();
+        await base.OnInitializedAsync();
     }
 }

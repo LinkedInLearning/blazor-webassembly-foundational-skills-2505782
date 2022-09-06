@@ -3,8 +3,9 @@
 @using MyBlazorShopHosted.Web.BlazorWasm.Client.Components
 @using System.Globalization
 @using Microsoft.Extensions.Localization
+@using MyBlazorShopHosted.Libraries.Services.ShoppingCart.Models
 @page "/cart"
-@inject IShoppingCartService shoppingCartService
+@inject HttpClient httpClient
 @inject IStringLocalizer<ShoppingCart> localizer
 <PageTitle>@localizer["Title"]</PageTitle>
 <HeadContent>
@@ -17,9 +18,12 @@
             <div class="display:flex flex-direction:column color:blue-265f8e margin-bottom:12">
                 <TableTemplate HeaderNames="@TableHeaderNames">
                     <RowTemplate>
-                        @foreach (var item in shoppingCartService.Get().Items)
+                        @if (ShoppingCartItems != null)
                         {
-                            <ShoppingCartItem Item="item"></ShoppingCartItem>
+                            @foreach (var item in ShoppingCartItems.Items)
+                            {
+                                <ShoppingCartItem Item="item"></ShoppingCartItem>
+                            }
                         }
                     </RowTemplate>
                 </TableTemplate>
@@ -35,4 +39,14 @@
         new TableHeaderName("Total", 1),
         new TableHeaderName("Remove", 1)
     };
+
+    private ShoppingCartModel? ShoppingCartItems { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ShoppingCartItems = await httpClient.GetFromJsonAsync<ShoppingCartModel?>(
+           "/api/shopping-cart"
+        );
+        await base.OnInitializedAsync();
+    }
 }

@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MyBlazorShopHosted.Web.BlazorWasm.Client;
-using MyBlazorShopHosted.Libraries.Services.Product;
-using MyBlazorShopHosted.Libraries.Services.Storage;
-using MyBlazorShopHosted.Libraries.Services.ShoppingCart;
 using System.Globalization;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -28,10 +25,6 @@ if (environmentResponse.IsSuccessStatusCode)
     using var environmentStream = await environmentResponse.Content.ReadAsStreamAsync();
     builder.Configuration.AddJsonStream(environmentStream);
 }
-
-builder.Services.AddSingleton<IStorageService, StorageService>();
-builder.Services.AddSingleton<IShoppingCartService, ShoppingCartService>();
-builder.Services.AddTransient<IProductService, ProductService>();
 
 builder.Services.AddLocalization();
 

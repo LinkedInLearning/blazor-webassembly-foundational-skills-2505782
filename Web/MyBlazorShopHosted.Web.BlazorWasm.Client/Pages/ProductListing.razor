@@ -2,10 +2,10 @@
 @using MyBlazorShopHosted.Libraries.Services.Product.Models
 @using Microsoft.AspNetCore.Components.WebAssembly.Hosting
 @page "/"
-@inject IProductService productService
 @inject NavigationManager navigationManager
 @inject IConfiguration configuration
 @inject IWebAssemblyHostEnvironment environment
+@inject HttpClient httpClient
 <PageTitle>Product listings</PageTitle>
 <HeadContent>
     <meta name="description" content="Product listing page" />
@@ -38,7 +38,7 @@
 }
 
 @code {
-    private IList<ProductModel> Products { get; set; }
+    private IList<ProductModel>? Products { get; set; }
 
     [Parameter, SupplyParameterFromQuery]
     public int? Page { get; set; }
@@ -46,13 +46,28 @@
     private int TotalPageCount { get; set; }
 }
 @functions {
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
         var productListingConfig = configuration.GetSection("ProductListing");
 
-        Products = productService.GetAll(productListingConfig.GetValue<int>("PageSize"), Page ?? 1);
-        TotalPageCount = productService.GetTotalPageCount(productListingConfig.GetValue<int>("PageSize"));
+        // Get product listing.
+        Products = await httpClient.GetFromJsonAsync<IList<ProductModel>>(
+            string.Format("/api/product?size={0}&page={1}", 
+            productListingConfig.GetValue<int>("PageSize"), 
+            Page ?? 1
+        ));
 
-        base.OnParametersSet();
+        // Get page count
+        var pageCount = await httpClient.GetFromJsonAsync<ProductPageCountModel>(
+            string.Format("/api/product/page-count?size={0}", 
+            productListingConfig.GetValue<int>("PageSize")
+        ));
+
+        if (pageCount != null)
+        {
+            TotalPageCount = pageCount.TotalPageCount;
+        }
+
+        await base.OnParametersSetAsync();
     }
 }

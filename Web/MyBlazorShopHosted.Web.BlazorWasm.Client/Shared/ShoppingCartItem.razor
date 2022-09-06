@@ -1,7 +1,7 @@
 ﻿@using MyBlazorShopHosted.Libraries.Services.ShoppingCart.Models
 @using MyBlazorShopHosted.Libraries.Services.ShoppingCart
 @using MyBlazorShopHosted.Libraries.Services.Product.Models
-@inject IShoppingCartService shoppingCartService
+@inject HttpClient httpClient
 @if (Item != null)
 {
     <tr class="@@mq-upto-768--display:block @@mq-upto-768--border-top-color:neutral-979797 @@mq-upto-768--border-top-style:solid @@mq-upto-768--border-top-width:1 @@mq-upto-768--padding-horizontal:24 padding-bottom:4 padding-top:20">
@@ -11,7 +11,7 @@
         <td class="@@mq-upto-768--display:block @@mq-upto-768--padding-left:cart-image @@mq-upto-768--padding-right:0 @@mq-upto-768--padding-vertical:0 padding:16"><span class="font-weight:500 @@mq-upto-768--margin-left:20 display:block @@mq-upto-768--margin-bottom:12 font-size:24">@Item.Quantity</span></td>
         <td class="@@mq-upto-768--display:block @@mq-upto-768--padding-left:cart-image @@mq-upto-768--padding-right:0 @@mq-upto-768--padding-vertical:0 padding:16"><span class="font-weight:500 @@mq-upto-768--margin-left:20 display:block @@mq-upto-768--margin-bottom:12 font-size:24 @@mq-upto-768--visually-hidden">@Item.TotalPrice.ToString("c")</span></td>
         <td class="@@mq-upto-768--display:block @@mq-upto-768--padding-left:cart-image @@mq-upto-768--padding-right:0 @@mq-upto-768--padding-vertical:0 padding:16 text-align:right">
-            <button type="button" @onclick="DeleteCartItem" aria-label="Remove @Item.Product.Name from your cart" class="display:inline-block @@mq-upto-768--margin-left:20 @@mq-upto-768--margin-top:-2 @@mq-upto-768--pos-left:136px @@mq-upto-768--pos-top:-30px group position:relative">Delete</button>
+            <button type="button" @onclick="DeleteCartItemAsync" aria-label="Remove @Item.Product.Name from your cart" class="display:inline-block @@mq-upto-768--margin-left:20 @@mq-upto-768--margin-top:-2 @@mq-upto-768--pos-left:136px @@mq-upto-768--pos-top:-30px group position:relative">Delete</button>
         </td>
     </tr>    
 }
@@ -23,11 +23,14 @@
     private ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
 }
 @functions {
-    private void DeleteCartItem()
+    private async Task DeleteCartItemAsync()
     {
         if (Item != null)
         {
-            shoppingCartService.DeleteProduct(Item);
+            await httpClient.DeleteAsync(
+                string.Format("/api/shopping-cart/{sku}", Item.Product.Sku)
+            );
+
             Item = null;
 
             if (ShoppingCartCountModel != null) {

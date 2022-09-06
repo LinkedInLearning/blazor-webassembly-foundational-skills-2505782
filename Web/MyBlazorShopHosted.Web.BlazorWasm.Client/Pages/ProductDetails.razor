@@ -4,8 +4,7 @@
 @using MyBlazorShopHosted.Libraries.Services.ShoppingCart.Models
 @using MyBlazorShopHosted.Web.BlazorWasm.Client.Shared.Layout
 @page "/product/{slug}"
-@inject IProductService productService
-@inject IShoppingCartService shoppingCartService
+@inject HttpClient httpClient
 @if (Product != null)
 {
     <PageTitle>@Product.Name</PageTitle>
@@ -31,13 +30,13 @@
                        <h1 class="font-weight:500 font-size:28 line-height:1_142 margin-bottom:24 @@mq-768--font-size:32 @@mq-768--line-height:1_125">@Product.Name</h1> 
                        <p class="font-weight:500 font-size:28 line-height:1_142 margin-bottom:24">@Product.Price.ToString("c")</p>
                         <div class="display:flex flex-wrap:wrap">
-                            <EditForm Model="ProductAddToCartModel" OnValidSubmit="AddToCart">
+                            <EditForm Model="ProductAddToCartModel" OnValidSubmit="AddToCartAsync">
                                 <DataAnnotationsValidator />
                                 <ValidationMessage For="() => ProductAddToCartModel.Quantity" />
 
                                 <InputNumber @bind-Value="ProductAddToCartModel.Quantity" class="padding:12 &:hocus--border-color:neutral-000000 appearance:none background-color:neutral-ffffff border-color:neutral-4c5b5c border-radius:0 border-style:solid border-width:1 color:neutral-483e40 min-height:form-input width:100" autocomplete="off" />
                                 <button class="display:inline-block padding-horizontal:24 padding-horizontal:24 &amp;:hocus--background-color:yellow-f0c808 background-color:orange-ff583d color:neutral-222224 font-size:18 font-weight:700 line-height:1 margin-bottom:32 padding-vertical:12 padding-vertical:16">
-                                    @if (shoppingCartService.HasProduct(Product.Sku))
+                                    @if (HasProductInCart)
                                     {
                                         <span>
                                             Added to cart.
@@ -74,6 +73,8 @@
 @code {
     private ProductModel? Product { get; set; }
 
+    private bool HasProductInCart { get; set; }
+
     [Parameter]
     public string? Slug { get; set; }
 
@@ -85,26 +86,46 @@
     private ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
 }
 @functions {
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        AllProducts = productService.GetAll();
+        // Get product listing.
+        AllProducts = await httpClient.GetFromJsonAsync<IList<ProductModel>>(
+            "/api/product"
+        );
 
-        base.OnInitialized();
+        await base.OnInitializedAsync();
     }
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
         if (!string.IsNullOrWhiteSpace(Slug))
         {
-            Product = productService.GetBySlug(Slug);
+            Product = await httpClient.GetFromJsonAsync<ProductModel?>(
+                string.Format("/api/product/byslug/{slug}", Slug)
+            );
+            if (Product != null)
+            {
+                HasProductInCart = await httpClient.GetFromJsonAsync<bool>(
+                        string.Format("/api/shopping-cart/has-product/{sku}", Product.Sku)
+                );
+            }
         }        
     }
 
-    private void AddToCart()
+    private async Task AddToCartAsync()
     {
         if (Product != null)
         {
-            shoppingCartService.AddProduct(Product, ProductAddToCartModel.Quantity ?? 1);
+            // Add to shopping cart
+            await httpClient.PostAsJsonAsync(
+                "/api/shopping-cart",
+                new
+                {
+                    sku = Product.Sku,
+                    quantity = ProductAddToCartModel.Quantity ?? 1
+                }
+            );
+
             ProductAddToCartModel.Quantity = null;
 
             if (ShoppingCartCountModel != null) {
