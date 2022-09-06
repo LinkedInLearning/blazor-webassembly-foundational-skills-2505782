@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyBlazorShopHosted.Libraries.Services.Product;
-using MyBlazorShopHosted.Libraries.Services.Product.Models;
+using MyBlazorShopHosted.Libraries.Shared.Product.Models;
 using MyBlazorShopHosted.Libraries.Services.ShoppingCart;
-using MyBlazorShopHosted.Libraries.Services.ShoppingCart.Models;
+using MyBlazorShopHosted.Libraries.Shared.ShoppingCart.Models;
 
 namespace MyBlazorShopHosted.Web.Server.Controllers
 {

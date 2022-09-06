@@ -1,6 +1,6 @@
-﻿using MyBlazorShopHosted.Libraries.Services.Product.Models;
+﻿using MyBlazorShopHosted.Libraries.Shared.Product.Models;
 
-namespace MyBlazorShopHosted.Libraries.Services.ShoppingCart.Models
+namespace MyBlazorShopHosted.Libraries.Shared.ShoppingCart.Models
 {
     /// <summary>
     /// Stores a shopping cart item.

@@ -1,4 +1,4 @@
-﻿using MyBlazorShopHosted.Libraries.Services.Product.Models;
+﻿using MyBlazorShopHosted.Libraries.Shared.Product.Models;
 using MyBlazorShopHosted.Libraries.Services.Storage;
 
 namespace MyBlazorShopHosted.Libraries.Services.Product

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlazorShopHosted.Libraries.Services.ShoppingCart.Models
+namespace MyBlazorShopHosted.Libraries.Shared.ShoppingCart.Models
 {
     public class ShoppingCartCountModel
     {

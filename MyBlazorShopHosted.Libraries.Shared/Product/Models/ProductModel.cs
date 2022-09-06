@@ -1,4 +1,4 @@
-﻿namespace MyBlazorShopHosted.Libraries.Services.Product.Models
+﻿namespace MyBlazorShopHosted.Libraries.Shared.Product.Models
 {
     /// <summary>
     /// Stores a product.

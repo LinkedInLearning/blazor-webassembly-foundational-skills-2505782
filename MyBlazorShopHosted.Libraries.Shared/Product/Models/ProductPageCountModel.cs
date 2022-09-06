@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlazorShopHosted.Libraries.Services.Product.Models
+namespace MyBlazorShopHosted.Libraries.Shared.Product.Models
 {
     public class ProductPageCountModel
     {

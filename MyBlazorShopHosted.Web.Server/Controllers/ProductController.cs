@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyBlazorShopHosted.Libraries.Services.Product;
-using MyBlazorShopHosted.Libraries.Services.Product.Models;
+using MyBlazorShopHosted.Libraries.Shared.Product.Models;
 
 namespace MyBlazorShopHosted.Web.Server.Controllers
 {
