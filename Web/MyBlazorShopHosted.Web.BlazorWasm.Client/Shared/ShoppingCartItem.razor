@@ -26,9 +26,7 @@
     {
         if (Item != null)
         {
-            await httpClient.DeleteAsync(
-                string.Format("/api/shopping-cart/{0}", Item.Product.Sku)
-            );
+            // Delete shopping cart item.
 
             Item = null;
 
