@@ -61,10 +61,32 @@
         if (Product != null)
         {
             // Add to shopping cart
+            // Add to shopping cart
             if (!HasProductInCart)
             {
-
+                await httpClient.PostAsJsonAsync(
+                    "/api/shopping-cart",
+                    new ShoppingCartAddModel
+                        {
+                            ProductSku = Product.Sku,
+                            Quantity = Quantity ?? 1
+                        }
+                );
             }
+            else
+            {
+                await httpClient.PutAsJsonAsync(
+                    "/api/shopping-cart",
+                    new ShoppingCartAddModel
+                        {
+                            ProductSku = Product.Sku,
+                            Quantity = Quantity ?? 1
+                        }
+                );
+            }
+            HasProductInCart = await httpClient.GetFromJsonAsync<bool>(
+                string.Format("/api/shopping-cart/has-product/{0}", Product.Sku)
+            );
 
             Quantity = null;
 
