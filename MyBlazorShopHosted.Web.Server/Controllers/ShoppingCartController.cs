@@ -10,7 +10,6 @@ namespace MyBlazorShopHosted.Web.Server.Controllers
 {
     [Route("api/shopping-cart")]
     [ApiController]
-    [RequiresAuthorizationHeader]
     public class ShoppingCartController : ControllerBase
     {
         private readonly IShoppingCartService _shoppingCartService;
@@ -41,7 +40,7 @@ namespace MyBlazorShopHosted.Web.Server.Controllers
             return _shoppingCartService.HasProduct(sku);
         }
 
-        [HttpPost]
+        [HttpPost, RequiresAuthorizationHeader]
         public IActionResult AddProduct(ShoppingCartAddModel shoppingCartAddModel)
         {
             var product = !string.IsNullOrWhiteSpace(shoppingCartAddModel.ProductSku) ? _productService.Get(shoppingCartAddModel.ProductSku) : null;
@@ -56,7 +55,7 @@ namespace MyBlazorShopHosted.Web.Server.Controllers
             return Ok(new { Success = true });
         }
 
-        [HttpPut]
+        [HttpPut, RequiresAuthorizationHeader]
         public IActionResult UpdateProduct(ShoppingCartAddModel shoppingCartAddModel)
         {
             var product = !string.IsNullOrWhiteSpace(shoppingCartAddModel.ProductSku) ? _productService.Get(shoppingCartAddModel.ProductSku) : null;
