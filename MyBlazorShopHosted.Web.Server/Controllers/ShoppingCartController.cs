@@ -4,11 +4,13 @@ using MyBlazorShopHosted.Libraries.Services.Product;
 using MyBlazorShopHosted.Libraries.Shared.Product.Models;
 using MyBlazorShopHosted.Libraries.Services.ShoppingCart;
 using MyBlazorShopHosted.Libraries.Shared.ShoppingCart.Models;
+using MyBlazorShopHosted.Web.Server.Attributes;
 
 namespace MyBlazorShopHosted.Web.Server.Controllers
 {
     [Route("api/shopping-cart")]
     [ApiController]
+    [RequiresAuthorizationHeader]
     public class ShoppingCartController : ControllerBase
     {
         private readonly IShoppingCartService _shoppingCartService;
