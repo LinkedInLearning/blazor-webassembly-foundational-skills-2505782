@@ -47,15 +47,10 @@
 @functions {
     protected override async Task OnParametersSetAsync()
     {
-        var productListingConfig = configuration.GetSection("ProductListing");
-        var pageSize = productListingConfig.GetValue<int>("PageSize");
+        var pageSize = 8; // Change page size here.
 
-        Products = await httpClient.GetFromJsonAsync<IList<ProductModel>?>(
-            string.Format("/api/product?size={0}&page={1}",
-            pageSize,
-            Page ?? 1
-            )
-        );
+        // Call products here
+
         TotalPageCount = await httpClient.GetFromJsonAsync<int>(
             string.Format("/api/product/total-page-count?size={0}",
             pageSize
