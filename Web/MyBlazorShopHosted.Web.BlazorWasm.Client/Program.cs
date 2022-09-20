@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MyBlazorShopHosted.Web.BlazorWasm.Client;
+using Serilog.Extensions.Logging;
+using Serilog;
 using System.Globalization;
 using System.Net.Http.Headers;
 
@@ -17,6 +19,14 @@ http.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue
     NoCache = true
 };
 builder.Services.AddScoped(sp => http);
+
+var levelSwitch = new Serilog.Core.LoggingLevelSwitch();
+Log.Logger = new LoggerConfiguration()
+    .Enrich.WithProperty("InstanceId", Guid.NewGuid().ToString("n"))
+    .WriteTo.BrowserHttp(http)
+    .CreateLogger();
+
+builder.Logging.AddProvider(new SerilogLoggerProvider());
 
 using var response = await http.GetAsync("productlisting.json");
 using var stream = await response.Content.ReadAsStreamAsync();

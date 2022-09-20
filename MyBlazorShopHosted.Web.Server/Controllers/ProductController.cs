@@ -10,15 +10,19 @@ namespace MyBlazorShopHosted.Web.Server.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly ILogger<ProductController> _logger;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, ILogger<ProductController> logger)
         {
             _productService = productService;
+            _logger = logger;
         }
 
         [HttpGet]
         public IList<ProductModel> GetAll(int? size = null, int page = 1)
         {
+            _logger.LogWarning("Get all products from controller");
+
             if (!size.HasValue)
             {
                 // Return all products
