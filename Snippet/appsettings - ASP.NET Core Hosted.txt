@@ -1,0 +1,14 @@
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Warning"
+    },
+    "WriteTo": [
+      {
+        "Name": "File",
+        "Args": {
+          "path": "./logs/log-.txt",
+          "rollingInterval": "Day"
+        }
+      }
+    ]
+  },
