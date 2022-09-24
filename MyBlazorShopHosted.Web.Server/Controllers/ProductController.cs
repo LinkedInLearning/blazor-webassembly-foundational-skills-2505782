@@ -21,8 +21,6 @@ namespace MyBlazorShopHosted.Web.Server.Controllers
         [HttpGet]
         public IList<ProductModel> GetAll(int? size = null, int page = 1)
         {
-            _logger.LogWarning("Get all products from controller");
-
             if (!size.HasValue)
             {
                 // Return all products
