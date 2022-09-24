@@ -18,12 +18,19 @@
         <div id="vue-shop" class="margin-bottom:32 quenched">
             <div class="display:flex flex-grow:1 flex-wrap:wrap margin-bottom:-32 margin-horizontal:-16">
                 <div class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-768--width:100">
-                    <ul class="display:flex flex-grow:1 flex-wrap:wrap margin-bottom:-32 margin-horizontal:-16">
-                        @foreach(var product in Products)
-                        {
-                            <ProductListingItem Product="product"></ProductListingItem>
-                        }                        
-                    </ul>
+                    <ErrorBoundary @ref="ProductErrorBoundary">
+                        <ChildContent>
+                        <ul class="display:flex flex-grow:1 flex-wrap:wrap margin-bottom:-32 margin-horizontal:-16">
+                            @foreach(var product in Products)
+                            {
+                                <ProductListingItem Product="product"></ProductListingItem>
+                            }                        
+                        </ul>
+                        </ChildContent>
+                        <ErrorContent>
+                            <p>There is an error getting the products.</p>
+                        </ErrorContent>
+                    </ErrorBoundary>
                     @if (TotalPageCount > 1) {
                         <ul class="pages">
                             @for (var page = 1; page <= TotalPageCount; page++) {
@@ -38,6 +45,8 @@
 }
 
 @code {
+    private ErrorBoundary? ProductErrorBoundary;
+
     private IList<ProductModel>? Products { get; set; }
 
     [Parameter, SupplyParameterFromQuery]
@@ -48,6 +57,8 @@
 @functions {
     protected override async Task OnParametersSetAsync()
     {
+        ProductErrorBoundary?.Recover();
+
         var productListingConfig = configuration.GetSection("ProductListing");
         var pageSize = productListingConfig.GetValue<int>("PageSize");
 
