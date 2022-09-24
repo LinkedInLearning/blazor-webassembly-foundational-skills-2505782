@@ -1,3 +1,0 @@
-<PropertyGroup>
-	<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
-</PropertyGroup>
