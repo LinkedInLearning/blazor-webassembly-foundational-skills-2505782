@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "MyBlazorShop": {
+    "MyBlazorShop.Web.BlazorWasm": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
