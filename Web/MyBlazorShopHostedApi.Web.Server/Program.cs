@@ -13,12 +13,26 @@ builder.Services.AddSingleton<IStorageService, StorageService>();
 builder.Services.AddSingleton<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 
+// Swagger
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "MyBlazorShopHostedApi", Version = "v1" });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
+
+    // Enable middleware to serve generated Swagger as a JSON endpoint.
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyBlazorShopHostedApi");
+        c.RoutePrefix = string.Empty;
+    });
 }
 else
 {
