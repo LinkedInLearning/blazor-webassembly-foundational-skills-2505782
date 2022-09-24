@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using MyBlazorShopHostedApi.Web.BlazorWasm.Client;
+using MyBlazorShopHostedApi.Web.Client;
 using System.Globalization;
 using System.Net.Http.Headers;
 

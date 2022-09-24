@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "MyBlazorShop": {
+    "MyBlazorShopHostedApi.Web.Client": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

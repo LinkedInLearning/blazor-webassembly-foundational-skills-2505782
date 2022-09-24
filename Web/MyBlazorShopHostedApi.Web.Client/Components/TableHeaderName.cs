@@ -1,4 +1,4 @@
-﻿namespace MyBlazorShopHostedApi.Web.BlazorWasm.Client.Components
+﻿namespace MyBlazorShopHostedApi.Web.Client.Components
 {
     public class TableHeaderName
     {

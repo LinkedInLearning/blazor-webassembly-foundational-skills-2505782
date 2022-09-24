@@ -16,8 +16,8 @@
   </ItemGroup>  
 
   <ItemGroup>
-    <ProjectReference Include="..\Libraries\MyBlazorShopHostedApi.Libraries.Services\MyBlazorShopHostedApi.Libraries.Services.csproj" />
-    <ProjectReference Include="..\Web\MyBlazorShopHostedApi.Web.BlazorWasm.Client\MyBlazorShopHostedApi.Web.BlazorWasm.Client.csproj" />
+    <ProjectReference Include="..\..\Libraries\MyBlazorShopHostedApi.Libraries.Services\MyBlazorShopHostedApi.Libraries.Services.csproj" />
+    <ProjectReference Include="..\MyBlazorShopHostedApi.Web.Client\MyBlazorShopHostedApi.Web.Client.csproj" />
   </ItemGroup>
 
 </Project>
