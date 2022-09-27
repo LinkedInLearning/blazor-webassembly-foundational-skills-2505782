@@ -1,0 +1,13 @@
+﻿.pages {
+    max-width: 800px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.pages li {
+    width: 100px;
+    float:left;
+}
+.pages li.active {
+    font-weight:bold;
+}
