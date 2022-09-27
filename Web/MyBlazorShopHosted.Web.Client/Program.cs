@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using MyBlazorShopHosted.Web.BlazorWasm.Client;
+using MyBlazorShopHosted.Web.Client;
 using Serilog.Extensions.Logging;
 using Serilog;
 using System.Globalization;

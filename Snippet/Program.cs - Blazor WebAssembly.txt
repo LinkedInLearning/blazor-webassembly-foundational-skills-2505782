@@ -1,7 +1,0 @@
-var levelSwitch = new Serilog.Core.LoggingLevelSwitch();
-Log.Logger = new LoggerConfiguration()
-    .Enrich.WithProperty("InstanceId", Guid.NewGuid().ToString("n"))    
-    .WriteTo.BrowserHttp(http)
-    .CreateLogger();
-
-builder.Logging.AddProvider(new SerilogLoggerProvider());

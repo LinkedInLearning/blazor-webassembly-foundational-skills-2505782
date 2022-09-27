@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MyBlazorShopHosted.Libraries.Shared\MyBlazorShopHosted.Libraries.Shared.csproj" />
+    <ProjectReference Include="..\MyBlazorShopHosted.Libraries.Shared\MyBlazorShopHosted.Libraries.Shared.csproj" />
   </ItemGroup>
 
 </Project>
