@@ -107,7 +107,7 @@
             if (!string.IsNullOrWhiteSpace(Slug))
             {
                 Product = await httpClient.GetFromJsonAsync<ProductModel?>(
-                    string.Format("/api/product/by-slu/{0}", Slug)
+                    string.Format("/api/product/by-slug/{0}", Slug)
                 );
                 if (Product != null)
                 {

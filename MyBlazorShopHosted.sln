@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlazorShopHosted.Web.Blaz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlazorShopHosted.Libraries.Services", "Libraries\MyBlazorShopHosted.Libraries.Services\MyBlazorShopHosted.Libraries.Services.csproj", "{8A617224-5D67-4B66-B12C-515EC4345A11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlazorShopHosted.Libraries.Shared", "MyBlazorShopHosted.Libraries.Shared\MyBlazorShopHosted.Libraries.Shared.csproj", "{C217B25E-7E3A-4F03-ACB6-C5309D43B278}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlazorShopHosted.Libraries.Shared", "MyBlazorShopHosted.Libraries.Shared\MyBlazorShopHosted.Libraries.Shared.csproj", "{C217B25E-7E3A-4F03-ACB6-C5309D43B278}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
