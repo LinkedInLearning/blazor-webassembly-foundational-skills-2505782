@@ -80,6 +80,9 @@
     private IList<ProductModel>? AllProducts { get; set; }
 
     private ProductAddToCartModel ProductAddToCartModel = new ProductAddToCartModel();
+
+    [CascadingParameter(Name = "ShoppingCartCountModel")]
+    private ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
 }
 @functions {
     protected override void OnInitialized()

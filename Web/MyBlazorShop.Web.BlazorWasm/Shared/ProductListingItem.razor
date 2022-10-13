@@ -38,6 +38,9 @@
     public ProductModel? Product { get; set; }
 
     public int? Quantity { get; set; }
+
+    [CascadingParameter(Name = "ShoppingCartCountModel")]
+    private ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
 }
 @functions {
     public void AddToCart()
