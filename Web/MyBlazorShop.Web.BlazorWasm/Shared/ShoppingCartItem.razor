@@ -29,6 +29,11 @@
         {
             shoppingCartService.DeleteProduct(Item);
             Item = null;
+
+            if (ShoppingCartCountModel != null)
+            {
+                ShoppingCartCountModel.OnCountChange();
+            }
         }
     }
 }

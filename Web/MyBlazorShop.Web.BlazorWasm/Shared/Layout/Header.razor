@@ -22,10 +22,29 @@
                 <use xlink:href="#cart"></use></svg>
                 </NavLink>
                 <span class="cart-count">
-                    0
+                    @if (ShoppingCartCountModel != null) {
+                        @ShoppingCartCountModel.Count
+                    }
                 </span>
                 </div>
            </div>
        </div>
    </header>
 </div>
+@code {
+    [CascadingParameter(Name = "ShoppingCartCountModel")]
+    private ShoppingCartCountModel? ShoppingCartCountModel { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (ShoppingCartCountModel != null) {
+            ShoppingCartCountModel.CountChange += () =>
+            {
+                ShoppingCartCountModel.Count = shoppingCartService.Count();
+                StateHasChanged();
+            };
+        }
+
+        base.OnInitialized();
+    }
+}
