@@ -2,6 +2,7 @@
 @using MyBlazorShop.Libraries.Services.Product.Models
 @page "/"
 @inject IProductService productService
+@inject NavigationManager navigationManager
 <PageTitle>Product listings</PageTitle>
 <HeadContent>
     <meta name="description" content="Product listing page" />
@@ -20,6 +21,13 @@
                             <ProductListingItem Product="product"></ProductListingItem>
                         }                        
                     </ul>
+                    @if (TotalPageCount > 1) {
+                        <ul class="pages">
+                            @for (var page = 1; page <= TotalPageCount; page++) {
+                                <li><a href="@navigationManager.GetUriWithQueryParameter("page", page)">@(page)</a></li>
+                            }
+                        </ul>
+                    }
                 </div>
             </div>
         </div>
@@ -28,11 +36,18 @@
 
 @code {
     private IList<ProductModel> Products { get; set; }
+
+    [Parameter, SupplyParameterFromQuery]
+    public int? Page { get; set; }
+
+    private int? TotalPageCount { get; set; }
 }
 @functions {
     protected override void OnParametersSet()
     {
-        Products = productService.GetAll();
+        Products = productService.GetAll(4, Page ?? 1);
+        TotalPageCount = productService.GetTotalPageCount(4);
+
         base.OnInitialized();
     }
 }

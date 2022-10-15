@@ -2,6 +2,7 @@
 @using MyBlazorShop.Libraries.Services.ShoppingCart;
 @using MyBlazorShop.Libraries.Services.ShoppingCart.Models
 @inject IShoppingCartService shoppingCartService
+@inject NavigationManager navigationManager
 @implements IProductAddToCart
 @if (Product != null)
 {
@@ -52,7 +53,9 @@
 
             if (ShoppingCartCountModel != null) {
                 ShoppingCartCountModel.OnCountChange();
-            } 
+            }
+
+            navigationManager.NavigateTo("/cart");
         }
     }
 }
