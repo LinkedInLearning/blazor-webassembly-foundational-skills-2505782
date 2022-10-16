@@ -6,6 +6,7 @@ using MyBlazorShop.Libraries.Services.Storage;
 using MyBlazorShop.Libraries.Services.ShoppingCart;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using System.Globalization;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -37,5 +38,11 @@ if (environmentResponse.IsSuccessStatusCode)
 builder.Services.AddSingleton<IStorageService, StorageService>();
 builder.Services.AddSingleton<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddTransient<IProductService, ProductService>();
+
+builder.Services.AddLocalization();
+
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-GB");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-GB");
+
 
 await builder.Build().RunAsync();
