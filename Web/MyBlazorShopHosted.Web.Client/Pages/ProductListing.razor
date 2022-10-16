@@ -4,6 +4,7 @@
 @inject NavigationManager navigationManager
 @inject IConfiguration configuration
 @inject IWebAssemblyHostEnvironment environment
+@inject HttpClient httpClient
 <PageTitle>Product listings</PageTitle>
 <HeadContent>
     <meta name="description" content="Product listing page" />
@@ -48,6 +49,20 @@
     {
         var productListingConfig = configuration.GetSection("ProductListing");
         var pageSize = productListingConfig.GetValue<int>("PageSize");
+
+        Products = await httpClient.GetFromJsonAsync<IList<ProductModel>>(
+            string.Format(
+                "/api/product?size={0}&page={1}",
+                pageSize,
+                Page ?? 1
+            )
+        );
+        TotalPageCount = await httpClient.GetFromJsonAsync<int>(
+            string.Format(
+                "/api/product/total-page-count?size={0}",
+                pageSize
+            )
+        );
 
         await base.OnParametersSetAsync();
     }
