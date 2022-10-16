@@ -1,10 +1,12 @@
 ﻿@using MyBlazorShop.Libraries.Services.Product
 @using MyBlazorShop.Libraries.Services.Product.Models
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
 @page "/"
 @inject IProductService productService
 @inject NavigationManager navigationManager
 @inject IConfiguration configuration
-<PageTitle>Product listings</PageTitle>
+@inject IWebAssemblyHostEnvironment environment
+<PageTitle>@(environment.Environment) Product listings</PageTitle>
 <HeadContent>
     <meta name="description" content="Product listing page" />
 </HeadContent>
