@@ -116,9 +116,30 @@
         if (Product != null)
         {
             // Add to shopping cart
-            if (!HasProductInCart) {
-
+            if (!HasProductInCart)
+            {
+                await httpClient.PostAsJsonAsync("/api/shopping-cart",
+                    new ShoppingCartAddModel
+                        {
+                            ProductSku = Product.Sku,
+                            Quantity = ProductAddToCartModel.Quantity ?? 1
+                        }
+                );
             }
+            else
+            {
+                await httpClient.PutAsJsonAsync("/api/shopping-cart",
+                    new ShoppingCartAddModel
+                        {
+                            ProductSku = Product.Sku,
+                            Quantity = ProductAddToCartModel.Quantity ?? 1
+                        }
+                );
+            }
+
+            HasProductInCart = await httpClient.GetFromJsonAsync<bool>(
+                    string.Format("/api/shopping-cart/has-product/{0}", Product.Sku)
+            );
 
 
             ProductAddToCartModel.Quantity = null;
