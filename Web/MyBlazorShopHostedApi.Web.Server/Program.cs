@@ -13,11 +13,24 @@ builder.Services.AddSingleton<IStorageService, StorageService>();
 builder.Services.AddSingleton<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("BlazorWasm", policy =>
+    {
+        policy.
+        WithOrigins("https://localhost:9002")
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
+
 // Swagger
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "MyBlazorShopHostedApi", Version = "v1" });
 });
+
+
 
 var app = builder.Build();
 
@@ -53,5 +66,7 @@ app.UseAuthorization();
 //app.MapRazorPages();
 app.MapControllers();
 //app.MapFallbackToFile("index.html");
+
+app.UseCors("BlazorWasm");
 
 app.Run();
