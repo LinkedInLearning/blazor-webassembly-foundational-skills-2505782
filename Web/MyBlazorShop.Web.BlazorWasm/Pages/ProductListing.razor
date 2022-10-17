@@ -6,6 +6,7 @@
 @inject NavigationManager navigationManager
 @inject IConfiguration configuration
 @inject IWebAssemblyHostEnvironment environment
+@inject ILogger<ProductListing> logger
 <PageTitle>Product listings</PageTitle>
 <HeadContent>
     <meta name="description" content="Product listing page" />
@@ -52,6 +53,8 @@
 
         Products = productService.GetAll(productListingConfig.GetValue<int>("PageSize"), Page ?? 1);
         TotalPageCount = productService.GetTotalPageCount(productListingConfig.GetValue<int>("PageSize"));
+
+        logger.LogInformation("Begin product listing");
 
         base.OnParametersSet();
     }

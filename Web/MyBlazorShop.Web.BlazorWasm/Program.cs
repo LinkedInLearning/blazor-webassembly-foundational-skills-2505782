@@ -21,6 +21,7 @@ http.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue
     NoCache = true
 };
 builder.Services.AddScoped(sp => http);
+builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
 using var response = await http.GetAsync("productlisting.json");
 using var stream = await response.Content.ReadAsStreamAsync();

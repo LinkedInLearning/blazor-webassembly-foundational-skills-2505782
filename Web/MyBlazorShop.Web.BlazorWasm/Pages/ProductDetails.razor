@@ -6,6 +6,7 @@
 @page "/product/{slug}"
 @inject IProductService productService
 @inject IShoppingCartService shoppingCartService
+@inject ILoggerFactory loggerFactory
 @if (Product != null)
 {
     <PageTitle>@Product.Name</PageTitle>
@@ -97,6 +98,9 @@
         if (!string.IsNullOrWhiteSpace(Slug))
         {
             Product = productService.GetBySlug(Slug);
+
+            var logger = loggerFactory.CreateLogger<ProductDetails>();
+            logger.LogInformation("Product has been set");
         }        
     }
 
