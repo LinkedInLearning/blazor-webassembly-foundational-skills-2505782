@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.9" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.1.0-dev-00285" />
+    <PackageReference Include="Serilog.AspNetCore.Ingestion" Version="1.0.0-dev-00032" />
   </ItemGroup>  
 
   <ItemGroup>

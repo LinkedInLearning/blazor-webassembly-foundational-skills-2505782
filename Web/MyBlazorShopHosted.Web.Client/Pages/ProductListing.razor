@@ -5,6 +5,7 @@
 @inject IConfiguration configuration
 @inject IWebAssemblyHostEnvironment environment
 @inject HttpClient httpClient
+@inject ILogger<ProductListing> logger
 <PageTitle>Product listings</PageTitle>
 <HeadContent>
     <meta name="description" content="Product listing page" />
@@ -61,6 +62,9 @@
             pageSize
             )
         );
+
+        logger.LogWarning("This is the product listing component");
+
         await base.OnParametersSetAsync();
     }
 }
