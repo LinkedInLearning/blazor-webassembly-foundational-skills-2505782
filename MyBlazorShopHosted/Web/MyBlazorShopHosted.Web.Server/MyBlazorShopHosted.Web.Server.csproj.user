@@ -3,6 +3,6 @@
   <PropertyGroup>
     <Controller_SelectedScaffolderID>ApiControllerEmptyScaffolder</Controller_SelectedScaffolderID>
     <Controller_SelectedScaffolderCategoryPath>root/Common/Api</Controller_SelectedScaffolderCategoryPath>
-    <NameOfLastUsedPublishProfile>C:\Users\roundthecode\source\repos\blazor-webassembly-foundational-skills-2505782\MyBlazorShopHosted.Web.Server\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\LinkedIn\source\repos\blazor-webassembly-foundational-skills-2505782\MyBlazorShopHosted\Web\MyBlazorShopHosted.Web.Server\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

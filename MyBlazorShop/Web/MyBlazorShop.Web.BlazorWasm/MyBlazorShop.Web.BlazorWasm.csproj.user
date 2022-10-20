@@ -3,5 +3,6 @@
   <PropertyGroup>
     <RazorPage_SelectedScaffolderID>RazorComponentScaffolder</RazorPage_SelectedScaffolderID>
     <RazorPage_SelectedScaffolderCategoryPath>root/Common/RazorComponent</RazorPage_SelectedScaffolderCategoryPath>
+    <NameOfLastUsedPublishProfile>C:\Users\LinkedIn\source\repos\blazor-webassembly-foundational-skills-2505782\MyBlazorShop\Web\MyBlazorShop.Web.BlazorWasm\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

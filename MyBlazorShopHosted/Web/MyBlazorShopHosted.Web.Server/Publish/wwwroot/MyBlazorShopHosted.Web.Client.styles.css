@@ -1,0 +1,26 @@
+/* /Pages/ProductListing.razor.rz.scp.css */
+.pages[b-1t679m21da] {
+    max-width: 800px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.pages li[b-1t679m21da] {
+    width: 100px;
+    float:left;
+}
+.pages li.active[b-1t679m21da] {
+    font-weight:bold;
+}
+/* /Shared/Layout/Header.razor.rz.scp.css */
+.cart-count[b-6n8vxnsibi] {
+    border-radius: 62.5rem;
+    color: #3a3a3d;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0 0.25rem;
+    right: -0.625rem;
+    top: -0.3125rem;
+    position: absolute;
+    background-color: #f0c808
+}
