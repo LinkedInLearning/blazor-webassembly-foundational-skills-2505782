@@ -1,4 +1,5 @@
 ﻿@using MyBlazorShopHosted.Web.Client.Shared.Layout
+<Error>
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -9,3 +10,4 @@
         <LayoutView Layout="@typeof(NotFoundLayout)" />
     </NotFound>
 </Router>
+</Error>
