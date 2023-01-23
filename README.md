@@ -1,7 +1,14 @@
 # Blazor WebAssembly: Foundational Skills
 This is the repository for the LinkedIn Learning course Blazor WebAssembly: Foundational Skills. The full course is available from [LinkedIn Learning][lil-course-url].
 
-_See the readme file in the main branch for updated instructions and information._
+![Blazor WebAssembly: Foundational Skills][lil-thumbnail-url] 
+
+Looking to boost your skills for a new project or more advanced role? Check out Blazor WebAssembly, the Microsoft framework that lets you build your own apps using C# and .NET—without writing a single line of JavaScript. Join instructor and senior web developer David Grace in this intermediate-level course, as he gives you an overview of how to configure and deploy web applications with Blazor WebAssembly.
+
+Explore the process of implementing CSS to particular Razor components, using both templates and customized components to meet the unique needs of your online environment. David covers configuration settings, API integration, HttpClient setup, cross-origin resource sharing, authentication, and more, as well as how to log and handle errors before and after you officially publish your application. By the end of this course, you’ll be ready to deploy a Blazor WebAssembly application using Microsoft Visual Studio, the .NET command line, Windows IIS, and Google.
+
+
+
 ## Instructions
 This repository has branches for each of the videos in the course. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage, or you can add `/tree/BRANCH_NAME` to the URL to go to the branch you want to access.
 
@@ -20,15 +27,16 @@ To resolve this issue:
     Add changes to git using this command: git add .
 	Commit changes using this command: git commit -m "some message"
 
-## Installing
-1. To use these exercise files, you must have the following installed:
-	- [list of requirements for course]
-2. Clone this repository into your local machine using the terminal (Mac), CMD (Windows), or a GUI tool like SourceTree.
-3. [Course-specific instructions]
+
+### Instructor
+
+David Grace 
+                            
 
 
-[0]: # (Replace these placeholder URLs with actual course URLs)
+                            
 
-[lil-course-url]: https://www.linkedin.com/learning/
-[lil-thumbnail-url]: http://
+Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/david-grace).
 
+[lil-course-url]: https://www.linkedin.com/learning/blazor-webassembly-foundational-skills?dApp=59033956
+[lil-thumbnail-url]: https://media.licdn.com/dms/image/C4D0DAQFuZSmU0LfGhQ/learning-public-crop_675_1200/0/1674167086535?e=2147483647&v=beta&t=JkJjGTXyhbLMKU-31FjiXs1sKDn-88f7XxoWQOPW4vM
